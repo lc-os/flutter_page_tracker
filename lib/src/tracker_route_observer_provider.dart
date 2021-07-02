@@ -6,19 +6,18 @@ class TrackerRouteObserverProvider extends InheritedWidget {
   final TrackerStackObserver<ModalRoute> trackerStackObserver = TrackerStackObserver<ModalRoute>();
 
   TrackerRouteObserverProvider({
-    Key key,
-    @required Widget child,
-  }): super(key: key, child: child);
+    required Widget child,
+  }): super(child: child);
 
   @override
   bool updateShouldNotify(InheritedWidget oldWidget) {
     return false;
   }
 
-  static TrackerStackObserver<ModalRoute> of(BuildContext context) {
+  static TrackerStackObserver<ModalRoute>? of(BuildContext context) {
     try {
-      return (context.inheritFromWidgetOfExactType(
-          TrackerRouteObserverProvider) as TrackerRouteObserverProvider)
+      return (context.dependOnInheritedWidgetOfExactType<TrackerRouteObserverProvider>(
+          ) as TrackerRouteObserverProvider)
           .trackerStackObserver;
     } catch (err) {
       return null;
